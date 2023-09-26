@@ -183,9 +183,9 @@ vector<long long> sieve(long long n) {
 /* Palindrome helper functions */
 
 bool isPalindrome(string s) {
-    int n = s.length();
-    for (int i = 0; i * 2 < n; ++i) {
-        if (s[i] != s[n - i - 1]) return false;
+    int len = s.length();
+    for (int i = 0; i * 2 < len; ++i) {
+        if (s[i] != s[len - i - 1]) return false;
     }
     return true;
 }
@@ -193,7 +193,11 @@ bool isPalindrome(string s) {
 // overloading function to accept numbers
 bool isPalindrome(long long n) {
     string s = to_string(n);
-    return isPalindrome(s);
+    int len = s.length();
+    for (int i = 0; i * 2 < len; ++i) {
+        if (s[i] != s[len - i - 1]) return false;
+    }
+    return true;
 }
 
 /* substrings */
@@ -896,85 +900,105 @@ int numberOfLeapYears(int y1, int y2) {
 }
 
 /* Bits helper functions */
-long long printBits(long long n) {
-    if (n == 0) return 0;
-    cout << n % 2;
-    printBits(n / 2);
-}
 
-long long countBits(long long n) {
-    if (n == 0) return 0;
-    return 1 + countBits(n / 2);
-}
-
-long long countBitsIter(long long n) {
-    long long ans = 0;
-    while (n != 0) {
-        ans += n & 1;
-        n /= 2;
+void printBits(long long n) {
+    while (n) {
+        cout << (n & 1);
+        n &= (n - 1);  // remove last set bit (more efficient than n >>= 1)
+        // n >>= 1;
     }
-    return ans;
 }
 
-long long countBitsFast(long long n) {
-    long long ans = 0;
-    while (n != 0) {
-        ++ans;
-        n &= (n - 1);
-    }
-    return ans;
-}
-
-long long countBitsRange(long long l, long long r) {
-    long long ans = 0;
-    for (long long i = l; i <= r; ++i) {
-        ans += countBits(i);
-    }
-    return ans;
-}
-
-long long countBitsRangeFast(long long l, long long r) {
-    return countBitsFast(r) - countBitsFast(l - 1);
-}
-
-string convertIntoBinaryIter(long long n) {
+string decimalToBinary(long long n) {
     string ans = "";
     while (n) {
-        n >>= 1;
         ans += (n & 1) + '0';
+        n &= (n - 1);
+        // n >>= 1;
     }
     reverse(ans.begin(), ans.end());
     return ans;
 }
 
-string convertIntoBinary(long long n) {
-    if (!n) return "";
-    return convertIntoBinary(n / 2) + to_string(n % 2);
-}
-
-long long convertIntoDecimal(string s) {
+long long countBits(long long n) {
     long long ans = 0;
-    for (int i = 0; i < s.length(); ++i) {
-        ans = ans * 2 + (s[i] - '0');
+    while (n) {
+        ++ans;
+        n >>= 1;
     }
     return ans;
 }
 
-long long convertIntoDecimalFast(string s) {
+long long countOnes(long long n) {
     long long ans = 0;
-    for (int i = 0; i < s.length(); ++i) {
-        ans = ans << 1;
-        if (s[i] == '1') ans = ans | 1;
+    while (n) {
+        n &= (n - 1);
+        ++ans;
     }
     return ans;
 }
 
-long long convertIntoDecimalFast2(string s) {
+long long countZeros(long long n) {
+    long long ans = 0;
+    while (n) {
+        if (!(n & 1)) ++ans;
+        // n >>= 1;
+        n &= (n - 1);
+    }
+    return ans;
+}
+
+long long binaryToDecimal(string s) {
     long long ans = 0;
     for (int i = 0; i < s.length(); ++i) {
         ans = (ans << 1) + (s[i] - '0');
     }
     return ans;
+}
+
+void printAllSubsets(int len) {  // from 0 to len-1
+    for (int i = 0; i < (1 << len); ++i) {
+        for (int j = 0; j < len; ++j) {
+            if (i & (1 << j)) cout << j << ' ';
+        }
+        cout << '\n';  // 0 1 01 2 02 12 012
+    }
+}
+
+void printAllCombinations(int len) {
+    for (int i = 0; i < (1 << len); ++i) {
+        for (int j = 0; j < len; ++j) {
+            if (i & (1 << j)) {
+                cout << 1;
+            } else {
+                cout << 0;
+            }
+        }
+        cout << endl;
+    }
+}
+
+// check if a number is power of 2
+bool isPowerOf2(long long n) { return n && !(n & (n - 1)); }
+
+// check if a number is odd
+bool isOdd(long long n) { return n & 1; }
+
+// check if a number is even
+bool isEven(long long n) { return !(n & 1); }
+
+// check if a number is positive using bits
+bool isPositive(long long n) { return !(n & (1 << 31)); }
+
+// check if a number is palindrome
+bool isPalindrome2(long long n) {
+    long long temp = n;
+    long long rev = 0;
+    while (temp) {
+        rev = (rev << 1) + (temp & 1);
+        temp >>= 1;
+    }
+    return rev == n;
 }
 
 // get the ith bit of a number
@@ -988,6 +1012,16 @@ long long setBit0(long long n, int i) { return n & ~(1 << i); }
 
 // toggle/flip the ith bit of a number
 long long toggleBit(long long n, int i) { return n ^ (1 << i); }
+
+long long greyCode(long long n) { return n ^ (n >> 1); }
+
+long long greyCodeInverse(long long n) {
+    long long ans = 0;
+    for (; n; n >>= 1) {
+        ans ^= n;
+    }
+    return ans;
+}
 
 /* recursion helper functions */
 
@@ -1355,5 +1389,3 @@ int main() {
 //
 // 6. Right Shift (>>)
 // x >> y = x / 2^y
-
-// int getBit(int n, int i) {
