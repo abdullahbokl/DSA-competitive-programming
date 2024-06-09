@@ -743,7 +743,7 @@ long long sumOfFirstNEvenNumbers(long long n) { return n * (n + 1); }
 
 long long sumOfFirstNOddNumbers(long long n) { return n * n; }
 
-long long oddNumberAtIndex(long long index) { return 2 * index + 1; }
+long long oddNumberAtIndex(long long index) { return 2 * (index - 1) + 1; }
 
 long long evenNumberAtIndex(long long index) { return 2 * index; }
 
