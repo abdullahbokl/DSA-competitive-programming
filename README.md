@@ -2,6 +2,26 @@
 
 A comprehensive collection of optimized algorithms and data structure implementations for competitive programming and technical interviews.
 
+## Table of Contents
+- [Authors](#-authors)
+- [Description](#-description)
+- [File Structure](#-file-structure)
+- [Helper Methods Overview](#-helper-methods-overview)
+  - [Number Theory Operations](#number-theory-operations)
+  - [Combinatorics](#combinatorics)
+  - [Prime Numbers](#prime-numbers)
+  - [String Operations](#string-operations)
+  - [Tree Operations](#tree-operations)
+  - [Matrix Operations](#matrix-operations)
+  - [Search Algorithms](#search-algorithms)
+  - [Sorting Algorithms](#sorting-algorithms)
+  - [Graph Algorithms](#graph-algorithms)
+  - [Bit Manipulation](#bit-manipulation)
+- [Usage](#-usage)
+- [Contributing](#-contributing)
+- [License](#-license)
+
+
 ## 👨‍💻 Authors
 
 - **Abdullah Khaled ElBokl**
@@ -29,9 +49,11 @@ This repository serves as a one-stop solution for common algorithmic problems an
 - [`fastPowerRecursive(a, b)`](helper_methods.cpp#L62) - Fast Power (recursive)
 - [`fastPowerIterative(a, b)`](helper_methods.cpp#L72) - Fast Power (iterative)
 - [`modAdd(a, b, m)`](helper_methods.cpp#L82) - Modular Addition
-- [`modSub(a, b, m)`](helper_methods.cpp#L83) - Modular Subtraction
-- [`modMul(a, b, m)`](helper_methods.cpp#L84) - Modular Multiplication
-- [`modPow(base, exp, mod)`](helper_methods.cpp#L92) - Modular Exponentiation
+- [`modSub(a, b, m)`](helper_methods.cpp#L84) - Modular Subtraction
+- [`modMul(a, b, m)`](helper_methods.cpp#L85) - Modular Multiplication
+- [`modNegative(a, m)`](helper_methods.cpp#L86) - Modular Negation
+- [`modPow(base, exp, mod)`](helper_methods.cpp#L91) - Modular Exponentiation
+- [`modPowIterative(base, exp, mod)`](helper_methods.cpp#L100) - Modular Exponentiation (iterative)
 
 ### Combinatorics
 - [`factorial(n)`](helper_methods.cpp#L116) - Factorial Calculation
