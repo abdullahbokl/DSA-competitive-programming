@@ -1,4 +1,30 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cmath>
+#include <queue>
+#include <stack>
+#include <map>
+#include <set>
+#include <bitset>
+#include <unordered_map>
+#include <unordered_set>
+#include <random>
+#include <chrono>
+#include <fstream>
+#include <iomanip>
+#include <functional>
+#include <cassert>
+#include <climits>
+#include <cstring>
+#include <numeric>
+#include <array>
+#include <utility>
+#include <tuple>
+#include <memory>
+#include <complex>
+
 using namespace std;
 
 // Type definitions for convenience
@@ -126,20 +152,22 @@ namespace Combinatorics {
     }
 
     // Fibonacci Sequence
-    ll fibonacci(ll n) {
+    template <typename T>
+    T fibonacci(T n) {
         if (n <= 1) return n;
         return fibonacci(n - 1) + fibonacci(n - 2);
     }
 
-    ll fibonacciIterative(ll n) {
+    template <typename T>
+    T fibonacciIterative(T n) {
         if (n <= 1) return n;
-        ll a = 0, b = 1, c;
+        T a = 0, b = 1;
         for (int i = 2; i <= n; ++i) {
-            c = a + b;
+            T c = a + b;
             a = b;
             b = c;
         }
-        return c;
+        return b;
     }
 }
 
@@ -232,6 +260,7 @@ namespace StringOps {
         transform(s.begin(), s.end(), s.begin(), ::toupper);
         return s;
     }
+}
 
 /****************************************************************************
  * Tree Operations
@@ -620,6 +649,8 @@ namespace BitOps {
  ****************************************************************************/
 void solve() {
     // Your solution code here
+    cout << "Hello, World!\n";
+    cout << NumberTheory::gcd(6, 9) << '\n';
 }
 
 int main() {
