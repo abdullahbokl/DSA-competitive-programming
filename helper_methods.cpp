@@ -20,7 +20,7 @@ namespace Constants {
 
 // Global variables (consider converting to local variables where possible)
 vector<vector<bool>> visMatrix(Constants::MATRIX_MAX, vector<bool>(Constants::MATRIX_MAX, false));
-vector<bool>> vis(Constants::MAX, false);
+vector<bool> vis(Constants::MAX, false);
 
 /****************************************************************************
  * I/O Optimization
@@ -217,6 +217,147 @@ namespace StringOps {
         }
         findPalindromicSubstrings(s, start + 1, size, result);
     }
+
+    string reverseString(string s) {
+        reverse(s.begin(), s.end());
+        return s;
+    }
+
+    string toLower(string s) {
+        transform(s.begin(), s.end(), s.begin(), ::tolower);
+        return s;
+    }
+
+    string toUpper(string s) {
+        transform(s.begin(), s.end(), s.begin(), ::toupper);
+        return s;
+    }
+
+/****************************************************************************
+ * Tree Operations
+ ****************************************************************************/
+namespace Tree {
+    struct TreeNode {
+        int val;
+        TreeNode *left, *right;
+        TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    };
+
+    void inorderTraversal(TreeNode* root) {
+        if (!root) return;
+        inorderTraversal(root->left);
+        cout << root->val << " ";
+        inorderTraversal(root->right);
+    }
+
+    void preorderTraversal(TreeNode* root) {
+        if (!root) return;
+        cout << root->val << " ";
+        preorderTraversal(root->left);
+        preorderTraversal(root->right);
+    }
+
+    void postorderTraversal(TreeNode* root) {
+        if (!root) return;
+        postorderTraversal(root->left);
+        postorderTraversal(root->right);
+        cout << root->val << " ";
+    }
+
+    int treeHeight(TreeNode* root) {
+        if (!root) return 0;
+        return 1 + max(treeHeight(root->left), treeHeight(root->right));
+    }
+
+    bool isBalanced(TreeNode* root) {
+        if (!root) return true;
+        
+        int leftHeight = treeHeight(root->left);
+        int rightHeight = treeHeight(root->right);
+        
+        return abs(leftHeight - rightHeight) <= 1 && 
+               isBalanced(root->left) && 
+               isBalanced(root->right);
+    }
+
+    bool isBSTUtil(TreeNode* root, long long min, long long max) {
+        if (!root) return true;
+        
+        if (root->val <= min || root->val >= max) return false;
+        
+        return isBSTUtil(root->left, min, root->val) && 
+               isBSTUtil(root->right, root->val, max);
+    }
+
+    bool isBST(TreeNode* root) {
+        return isBSTUtil(root, LLONG_MIN, LLONG_MAX);
+    }
+}
+
+/****************************************************************************
+ * Matrix Operations
+ ****************************************************************************/
+namespace Matrix {
+    vector<vector<int>> matrixMultiply(vector<vector<int>>& A, vector<vector<int>>& B) {
+        int n = A.size(), m = A[0].size(), p = B[0].size();
+        vector<vector<int>> C(n, vector<int>(p, 0));
+        
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < p; ++j) {
+                for (int k = 0; k < m; ++k) {
+                    C[i][j] += A[i][k] * B[k][j];
+                }
+            }
+        }
+        return C;
+    }
+
+    vector<vector<int>> matrixPower(vector<vector<int>>& A, int n) {
+        int size = A.size();
+        vector<vector<int>> result(size, vector<int>(size, 0));
+        
+        // Initialize result as identity matrix
+        for (int i = 0; i < size; ++i) {
+            result[i][i] = 1;
+        }
+        
+        while (n > 0) {
+            if (n & 1) {
+                result = matrixMultiply(result, A);
+            }
+            A = matrixMultiply(A, A);
+            n >>= 1;
+        }
+        return result;
+    }
+
+    void rotateMatrix90Degrees(vector<vector<int>>& matrix) {
+        int n = matrix.size();
+        
+        // Transpose
+        for (int i = 0; i < n; ++i) {
+            for (int j = i; j < n; ++j) {
+                swap(matrix[i][j], matrix[j][i]);
+            }
+        }
+        
+        // Reverse each row
+        for (int i = 0; i < n; ++i) {
+            reverse(matrix[i].begin(), matrix[i].end());
+        }
+    }
+
+    vector<vector<int>> transposeMatrix(vector<vector<int>>& matrix) {
+        int n = matrix.size(), m = matrix[0].size();
+        vector<vector<int>> result(m, vector<int>(n));
+        
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < m; ++j) {
+                result[j][i] = matrix[i][j];
+            }
+        }
+        return result;
+    }
 }
 
 /****************************************************************************
@@ -376,6 +517,64 @@ namespace Graph {
                 }
             }
         }
+    }
+
+    bool hasCycle(vector<vector<int>>& adj) {
+        int n = adj.size();
+        vector<int> color(n, 0);  // 0: unvisited, 1: visiting, 2: visited
+        
+        function<bool(int)> dfs = [&](int u) {
+            color[u] = 1;  // Mark as visiting
+            
+            for (int v : adj[u]) {
+                if (color[v] == 1) return true;  // Back edge found
+                if (color[v] == 0 && dfs(v)) return true;
+            }
+            
+            color[u] = 2;  // Mark as visited
+            return false;
+        };
+        
+        for (int u = 0; u < n; ++u) {
+            if (color[u] == 0 && dfs(u)) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+namespace Permutation {
+    // it's a permutaion if all elements are in range [1, n] 
+    bool isPermutation(vector<int>& arr) { 
+        int n = arr.size();
+        vector<bool> seen(n + 1, false);
+        
+        for (int num : arr) {
+            if (num < 1 || num > n || seen[num]) return false;
+            seen[num] = true;
+        }
+        
+        return true;
+    }
+
+    vector<int> nextPermutation(vector<int>& arr) {
+        int n = arr.size(), i = n - 2;
+        vector<int> result = arr;
+        
+        // Find first decreasing element from right
+        while (i >= 0 && result[i] >= result[i + 1]) --i;
+        
+        if (i >= 0) {
+            // Find smallest element greater than arr[i]
+            int j = n - 1;
+            while (j >= 0 && result[j] <= result[i]) --j;
+            swap(result[i], result[j]);
+        }
+        
+        // Reverse the suffix
+        reverse(result.begin() + i + 1, result.end());
+        return result;
     }
 }
 
