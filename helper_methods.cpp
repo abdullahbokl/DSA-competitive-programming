@@ -1,29 +1,4 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <algorithm>
-#include <cmath>
-#include <queue>
-#include <stack>
-#include <map>
-#include <set>
-#include <bitset>
-#include <unordered_map>
-#include <unordered_set>
-#include <random>
-#include <chrono>
-#include <fstream>
-#include <iomanip>
-#include <functional>
-#include <cassert>
-#include <climits>
-#include <cstring>
-#include <numeric>
-#include <array>
-#include <utility>
-#include <tuple>
-#include <memory>
-#include <complex>
+#include <bits/stdc++.h>
 
 using namespace std;
 
