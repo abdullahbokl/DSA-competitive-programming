@@ -1,6 +1,21 @@
 # Data Structures and Algorithms Helper Methods
 
-This repository contains a collection of commonly used algorithms and data structure implementations for competitive programming.
+A comprehensive collection of optimized algorithms and data structure implementations for competitive programming and technical interviews.
+
+## 👨‍💻 Authors
+
+- **Names**
+  - **Abdullah Khaled Elbokl**
+- **LinkedIn**
+  - [Abdullah ElBokl](https://www.linkedin.com/in/abdullahbokl/)
+
+## 📝 Description
+
+This repository serves as a one-stop solution for common algorithmic problems and data structure implementations in C++. It's designed to be:
+- **Efficient**: Optimized implementations for competitive programming
+- **Readable**: Clean code with clear naming conventions
+- **Well-documented**: Detailed comments and usage examples
+- **Easy to use**: Just copy and paste the methods you need
 
 ## 📁 File Structure
 
@@ -9,21 +24,21 @@ This repository contains a collection of commonly used algorithms and data struc
 ## 🛠️ Helper Methods Overview
 
 ### Number Theory Operations
-- [`gcd(a, b)`](helper_methods.cpp#L37-L40) - Greatest Common Divisor (recursive)
+- [`gcd(a, b)`](helper_methods.cpp#L38-L40) - Greatest Common Divisor (recursive)
 - [`gcdIterative(a, b)`](helper_methods.cpp#L42-L49) - Greatest Common Divisor (iterative)
 - [`lcm(a, b)`](helper_methods.cpp#L51-L54) - Least Common Multiple
 - [`lcmIterative(a, b)`](helper_methods.cpp#L56-L60) - Least Common Multiple (iterative)
 - [`fastPowerRecursive(a, b)`](helper_methods.cpp#L62-L70) - Fast Power (recursive)
 - [`fastPowerIterative(a, b)`](helper_methods.cpp#L72-L80) - Fast Power (iterative)
-- [`modAdd(a, b, m)`](helper_methods.cpp#L82) - Modular Addition
+- [`modAdd(a, b, m)`](helper_methods.cpp#L83) - Modular Addition
 - [`modSub(a, b, m)`](helper_methods.cpp#L84) - Modular Subtraction
 - [`modMul(a, b, m)`](helper_methods.cpp#L85) - Modular Multiplication
 - [`modPow(base, exp, mod)`](helper_methods.cpp#L91-L98) - Modular Exponentiation
 
 ### Combinatorics
-- [`factorial(n)`](helper_methods.cpp#L116-L120) - Factorial Calculation
+- [`factorial(n)`](helper_methods.cpp#L117-L120) - Factorial Calculation
 - [`factorialIterative(n)`](helper_methods.cpp#L122-L126) - Factorial (iterative)
-- [`fibonacci(n)`](helper_methods.cpp#L128-L133) - Fibonacci Number
+- [`fibonacci(n)`](helper_methods.cpp#L129-L133) - Fibonacci Number
 - [`fibonacciIterative(n)`](helper_methods.cpp#L135-L145) - Fibonacci (iterative)
 
 ### Prime Numbers
